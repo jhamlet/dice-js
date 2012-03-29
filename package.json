@@ -1,0 +1,31 @@
+{   
+    "name": "dice",
+    "description": "Roll some dice.",
+    "version": "0.0.1",
+    "keywords": [
+        "dice",
+        "die"
+    ],
+    "main": "./lib/dice.js",
+    "directories": {
+        "lib": "lib"
+    },
+    "devDependencies": {
+        "mocha": "0.3.x",
+        "should": "0.5.x"
+    },
+    "scripts": {
+        "test": "mocha"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://github.com/jhamlet/dice-js/raw/master/LICENSE"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/jhamlet/dice-js.git"
+    },
+    "preferGlobal": true
+}
