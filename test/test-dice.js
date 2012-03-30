@@ -92,7 +92,7 @@ suite("Dice", function () {
         results.should.be.within(3, 18);
         
         dice.results.length.should.equal(3);
-        dice.lowDice.length.should.equal(2);
+        dice.lowResults.length.should.equal(2);
         
         console.log("" + dice);
     });
