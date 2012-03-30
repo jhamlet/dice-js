@@ -24,7 +24,7 @@ suite("Dice", function () {
         result.should.be.within(1, 6);
         dice.rolled.should.equal(true);
         dice.total.should.not.equal(0);
-        dice.dice.length.should.equal(1);
+        dice.results.length.should.equal(1);
         
         console.log("" + dice);
         ("" + dice).should.match(/d6 \[(\d+)\] = \d+/);
@@ -41,7 +41,7 @@ suite("Dice", function () {
         result.should.be.within(1, 18);
         dice.rolled.should.equal(true);
         dice.total.should.not.equal(0);
-        dice.dice.length.should.equal(3);
+        dice.results.length.should.equal(3);
         
         console.log("" + dice);
         ("" + dice).should.match(/d6 \[(\d+(?:, )?){3}\] = \d+/);
@@ -55,7 +55,7 @@ suite("Dice", function () {
         result = dice.roll();
         result.should.be.within(5, 20);
         
-        dietotal = dice.dice.reduce(function (p, d) {
+        dietotal = dice.results.reduce(function (p, d) {
             return p + d;
         }, 0);
         
@@ -72,7 +72,7 @@ suite("Dice", function () {
         result = dice.roll();
         result.should.be.within(6, 21);
         
-        dietotal = dice.dice.reduce(function (p, d) {
+        dietotal = dice.results.reduce(function (p, d) {
             return (p + d);
         }, 0);
         
@@ -91,7 +91,7 @@ suite("Dice", function () {
         results = dice.roll();
         results.should.be.within(3, 18);
         
-        dice.dice.length.should.equal(3);
+        dice.results.length.should.equal(3);
         dice.lowDice.length.should.equal(2);
         
         console.log("" + dice);
