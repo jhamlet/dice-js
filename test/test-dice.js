@@ -1,6 +1,7 @@
 
-var Dice = require("../").Dice,
-    behaviors = Dice.behaviors
+var lib = require("../"),
+    Dice = lib.Dice,
+    behaviors = lib.diceBehaviors
 ;
 
 suite("Dice", function () {
@@ -99,9 +100,7 @@ suite("Dice", function () {
     });
     
     test("10d6 Hero Dice", function () {
-        var dice = new Dice(10, 6);
-        
-        dice.addBehavior(behaviors.heroDice());
+        var dice = new lib.HeroDice(10);
         
         dice.roll();
         dice.stun.should.be.within(10, 60);
@@ -122,25 +121,25 @@ suite("Dice", function () {
     });
     
     test("6d6 Shadowrun dice", function () {
-        var dice = new Dice(6, 6);
-        
-        dice.addBehavior(
-            behaviors.wildDice(),
-            behaviors.successDice(5)
-        );
-        
+        var dice = new lib.ShadowrunDice(6);
         dice.roll();
-        
         console.log("" + dice);
     });
     
     test("6d6 WEG Star Wars", function () {
-        var dice = new Dice(6, 6);
-        
-        dice.addBehavior(behaviors.wildDice(1));
-        
+        var dice = new lib.WEGStarWarsDice(6);
         dice.roll();
+        console.log("" + dice);
+    });
+
+    test("4d6+2 WEG Star Wars", function () {
+        var dice = new lib.WEGStarWarsDice(4, 2);
+        dice.roll();
+        dice.total.should.be.above(6);
+        dice.results.reduce(function (t, d) { return (t + d); }, 0).
+            should.equal(dice.total - 2);
         
+        ("" + dice).should.match(/4d6 \[(\d+(?:, )?)+\] = \d+!?/);
         console.log("" + dice);
     });
 });
