@@ -1,6 +1,7 @@
 
 var Dice = require("../").Dice,
-    diceBehaviors = require("../").behaviors;
+    behaviors = Dice.behaviors
+;
 
 suite("Dice", function () {
     
@@ -48,7 +49,7 @@ suite("Dice", function () {
     });
     
     test("Roll 3d6+2", function () {
-        var dice = new Dice(3, 6, [diceBehaviors.resultModifier(2)]),
+        var dice = new Dice(3, 6, [behaviors.resultModifier(2)]),
             result, dietotal
         ;
         
@@ -65,7 +66,7 @@ suite("Dice", function () {
     });
 
     test("Roll 3d6 and add 1 to every die", function () {
-        var dice = new Dice(3, 6, [diceBehaviors.dieModifier(1)]),
+        var dice = new Dice(3, 6, [behaviors.dieModifier(1)]),
             result, dietotal
         ;
         
@@ -86,7 +87,7 @@ suite("Dice", function () {
             results
         ;
         
-        dice.addBehavior(diceBehaviors.removeLowest(2));
+        dice.addBehavior(behaviors.removeLowest(2));
         
         results = dice.roll();
         results.should.be.within(3, 18);
@@ -100,7 +101,7 @@ suite("Dice", function () {
     test("10d6 Hero Dice", function () {
         var dice = new Dice(10, 6);
         
-        dice.addBehavior(diceBehaviors.heroDice());
+        dice.addBehavior(behaviors.heroDice());
         
         dice.roll();
         dice.stun.should.be.within(10, 60);
@@ -112,7 +113,7 @@ suite("Dice", function () {
     test("6d6 Success dice", function () {
         var dice = new Dice(6, 6);
         
-        dice.addBehavior(diceBehaviors.successDice(5));
+        dice.addBehavior(behaviors.successDice(5));
         
         dice.roll();
         dice.total.should.be.within(0, 6);
@@ -124,8 +125,8 @@ suite("Dice", function () {
         var dice = new Dice(6, 6);
         
         dice.addBehavior(
-            diceBehaviors.wildDice(),
-            diceBehaviors.successDice(5)
+            behaviors.wildDice(),
+            behaviors.successDice(5)
         );
         
         dice.roll();
@@ -136,7 +137,7 @@ suite("Dice", function () {
     test("6d6 WEG Star Wars", function () {
         var dice = new Dice(6, 6);
         
-        dice.addBehavior(diceBehaviors.wildDice(1));
+        dice.addBehavior(behaviors.wildDice(1));
         
         dice.roll();
         
