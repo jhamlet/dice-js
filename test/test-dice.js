@@ -1,7 +1,7 @@
 
 var lib = require("../"),
     Dice = lib.Dice,
-    behaviors = lib.diceBehaviors
+    behaviors = Dice.behaviors
 ;
 
 suite("Dice", function () {
@@ -50,7 +50,7 @@ suite("Dice", function () {
     });
     
     test("Roll 3d6+2", function () {
-        var dice = new Dice(3, 6, [behaviors.resultModifier(2)]),
+        var dice = new Dice(3, 6, [new behaviors.ResultModifier(2)]),
             result, dietotal
         ;
         
@@ -67,7 +67,7 @@ suite("Dice", function () {
     });
 
     test("Roll 3d6 and add 1 to every die", function () {
-        var dice = new Dice(3, 6, [behaviors.dieModifier(1)]),
+        var dice = new Dice(3, 6, [new behaviors.DieModifier(1)]),
             result, dietotal
         ;
         
@@ -88,7 +88,7 @@ suite("Dice", function () {
             results
         ;
         
-        dice.addBehavior(behaviors.removeLowest(2));
+        dice.addBehavior(new behaviors.RemoveLowest(2));
         
         results = dice.roll();
         results.should.be.within(3, 18);
@@ -100,7 +100,7 @@ suite("Dice", function () {
     });
     
     test("10d6 Hero Dice", function () {
-        var dice = new lib.HeroDice(10);
+        var dice = lib.heroDice(10);
         
         dice.roll();
         dice.stun.should.be.within(10, 60);
@@ -112,7 +112,7 @@ suite("Dice", function () {
     test("6d6 Success dice", function () {
         var dice = new Dice(6, 6);
         
-        dice.addBehavior(behaviors.successDice(5));
+        dice.addBehavior(new behaviors.SuccessDice(5));
         
         dice.roll();
         dice.total.should.be.within(0, 6);
@@ -121,25 +121,25 @@ suite("Dice", function () {
     });
     
     test("6d6 Shadowrun dice", function () {
-        var dice = new lib.ShadowrunDice(6);
+        var dice = lib.shadowrunDice(6);
         dice.roll();
         console.log("" + dice);
     });
     
     test("6d6 WEG Star Wars", function () {
-        var dice = new lib.WEGStarWarsDice(6);
+        var dice = lib.d6StarWarsDice(6);
         dice.roll();
         console.log("" + dice);
     });
 
     test("4d6+2 WEG Star Wars", function () {
-        var dice = new lib.WEGStarWarsDice(4, 2);
+        var dice = lib.d6StarWarsDice(4, 2);
         dice.roll();
         dice.total.should.be.above(6);
         dice.results.reduce(function (t, d) { return (t + d); }, 0).
             should.equal(dice.total - 2);
         
-        ("" + dice).should.match(/4d6 \[(\d+(?:, )?)+\] = \d+!?/);
+        ("" + dice).should.match(/4d6\+2 \[(\d+(?:, )?)+\] = \d+!?/);
         console.log("" + dice);
     });
 });
