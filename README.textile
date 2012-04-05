@@ -1,0 +1,13 @@
+
+
+h2. Expressions
+
+|_. Expression |_. Function |_. Explanation |_. Example |
+| XdY | Standard   | Roll X dice with Y faces and sum the results. | |
+| XdYdN | Drop | Roll X dice with Y faces, drop N lowest, and sum the results. | |
+| XdYkN | Keep | Roll X dice with Y faces, keep N highest, and sum the results. | |
+| XdYrN | Reroll | Roll X dice with Y faces, re-roll any dice lower than N, and sum the results | |
+| XdYe | Explode | Roll X dice with Y faces, roll an additional dice with Y faces for each result that rolls Y. | |
+| XdYsN | Success | Roll X dice with Y faces, and count any results equal to or greater than N as a success. | |
+| XdYesN | Exploding Success | As _Success_ above, but each die can _Explode_ and generate additional successes. | |
+| XdYo | Open | Rol X dice with Y faces, explode any dice that roll Y. Return all results and highest result. |
