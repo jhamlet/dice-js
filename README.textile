@@ -2,12 +2,38 @@
 
 h2. Expressions
 
-|_. Expression |_. Function |_. Explanation |_. Example |
-| XdY | Standard   | Roll X dice with Y faces and sum the results. | |
-| XdYdN | Drop | Roll X dice with Y faces, drop N lowest, and sum the results. | |
-| XdYkN | Keep | Roll X dice with Y faces, keep N highest, and sum the results. | |
-| XdYrN | Reroll | Roll X dice with Y faces, re-roll any dice lower than N, and sum the results | |
-| XdYe | Explode | Roll X dice with Y faces, roll an additional dice with Y faces for each result that rolls Y. | |
-| XdYsN | Success | Roll X dice with Y faces, and count any results equal to or greater than N as a success. | |
-| XdYesN | Exploding Success | As _Success_ above, but each die can _Explode_ and generate additional successes. | |
-| XdYo | Open | Rol X dice with Y faces, explode any dice that roll Y. Return all results and highest result. |
+{background:#ccc}. |_. Expression |_. Function |_. Explanation |
+| XdY | Standard   | Roll X dice with Y faces and sum the results. |
+{background:#ccc}. | XdYlN | Low | Roll X dice with Y faces, keep N lowest |
+| XdYhN | High | Roll X dice with Y faces, keep N highest |
+{background:#ccc}. | XdYdN | Drop | Roll X dice with Y faces, drop N lowest, and sum the results. |
+| XdYkN | Keep | Roll X dice with Y faces, keep N highest, and sum the results. |
+{background:#ccc}. | XdYrN | Reroll | Roll X dice with Y faces, re-roll any dice lower than N, and sum the results |
+| XdYe | Explode | Roll X dice with Y faces, roll an additional dice with Y faces for each result that rolls Y. Sum the results. |
+{background:#ccc}. | XdYsN | Success | Roll X dice with Y faces, and count any results equal to or greater than N as a success. |
+| XdYo | Open | Rol X dice with Y faces, explode any dice that roll Y. Return highest result. |
+{background:#ccc}. | XdYgN | Glitch | Roll X dice with Y faces. Count the number of dice that came up equal to or lower than N. If the count is equal, or lower than, X display *Glitch*. If the count is more than half of X display *Critical Glitch*. |
+
+_Note_: the expression letters are case in-sensitive. i.e: 3d6 is the same as 3D6, as is 5d6d2 equivalent to 5d6D2, etc...
+
+You can combine the expressions to get different behaviors:
+
+{background:#ccc}. |_. Expression |_. Function |_. Explanation |
+| XdYesN | Exploding Success | Combines _Explode_ and _Success_. Additional dice from exploding can generate additional successes. |
+
+
+h3. Examples
+
+{background:#ccc}. |_. Expression |_. Result |
+| 3d6 | [4, 5, 3] = 12 |
+{background:#ccc}. | 5d6l2 | [4, 5, 3, 2, 1] = 2, 1 |
+| 5d6h2 | [3, 2, 4, 4, 1] = 3, 4 |
+{background:#ccc}. | 5d6d2 | [4, 5, 2, 3, 1] = 12 |
+| 5d6k3 | [1, 3, 4, 5, 5] = 14 |
+{background:#ccc}. | 3d10r1 | [7, 8, 4] = 19 |
+| 5d6e | [1, 3, 6, 2, 4, 3] = 19 |
+{background:#ccc}. | 5d6s5 | [1, 4, 5, 6, 3] = 2 |
+| 6d6es5 | [2, 3, 5, 6, 6, 4, 3, 5] = 4 |
+{background:#ccc}. | 3d10o | [7, 10, 6] = 10 |
+| [1d12 2d8 3d6]k2 | [7, 3, 1, 3, 5, 1] = 12 |
+{background:#ccc}. | [3d6 2d8]h2 | [3, 1, 5, 5, 7] = 5, 7 |
