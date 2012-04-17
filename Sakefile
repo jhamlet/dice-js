@@ -1,0 +1,20 @@
+/*globals CLEAN, file, sh, task */
+
+var idxFile = "lib/dice.js",
+    prereqs = new FileList("lib/*"),
+    toBuild = "dice-min.js"
+;
+
+CLEAN.include(toBuild);
+
+file(toBuild, prereqs, function (t) {
+    sh("infuse " + idxFile + " " + t.name);
+});
+
+task("default", [toBuild]);
+
+task("test", function (t) {
+    sh("mocha test/test-*", function (results) {
+        console.log(results);
+    });
+});

@@ -11,8 +11,10 @@
         "lib": "lib"
     },
     "devDependencies": {
-        "mocha": "0.3.x",
-        "should": "0.5.x"
+        "mocha":  ">=0.3.x",
+        "should": ">=0.5.x",
+        "infuse": "*",
+        "sake":   ">=0.0.x"
     },
     "scripts": {
         "test": "mocha"
