@@ -1,20 +1,17 @@
-/*globals CLEAN, file, sh, task */
+/*globals CLEAN, FileList, file, sh, task */
 
-var idxFile = "lib/dice.js",
-    prereqs = new FileList("lib/*"),
-    toBuild = "dice-min.js"
-;
+var prereqs = new FileList("lib/*");
 
-CLEAN.include(toBuild);
+CLEAN.include("dice-min.js");
 
-file(toBuild, prereqs, function (t) {
-    sh("infuse " + idxFile + " " + t.name);
+file("dice-min.js", prereqs, function (t) {
+    sh("infuse lib/dice.js " + t.name + (t.exists ? " -F" : "") + " -E");
 });
 
-task("default", [toBuild]);
+task("default", ["dice-min.js"]);
 
-task("test", function (t) {
-    sh("mocha test/test-*", function (results) {
+task("test", ["dice-min.js"], function (t) {
+    sh("mocha test/test-min.js", function (results) {
         console.log(results);
     });
 });
