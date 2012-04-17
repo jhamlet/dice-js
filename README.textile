@@ -1,3 +1,10 @@
+h2. Work In Progress
+
+This is currently a **work in progress**. The notes below are mostly for myself, and are what I am aiming for the library to do.
+
+Mostly, this is a test repository for my other two repositories: "node-infuse":http://github.com/jhamlet/node-infuse and "sake-node":http://github.com/jhamlet/sake-node.
+
+Eventually this will work; as a nodejs module or a browser loaded file...
 
 
 h2. Expressions
