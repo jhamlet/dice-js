@@ -101,7 +101,7 @@ suite("Dice", function () {
     });
     
     test("10d6 Hero Dice", function () {
-        var dice = lib.heroDice(10);
+        var dice = lib.hero.normalDice(10);
         
         dice.roll();
         dice.stun.should.be.within(10, 60);
@@ -122,19 +122,19 @@ suite("Dice", function () {
     });
     
     test("6d6 Shadowrun dice", function () {
-        var dice = lib.shadowrunDice(6);
+        var dice = lib.catalyst.shadowrunDice(6);
         dice.roll();
         console.log("" + dice);
     });
     
     test("6d6 WEG Star Wars", function () {
-        var dice = lib.d6StarWarsDice(6);
+        var dice = lib.weg.starWarsDice(6);
         dice.roll();
         console.log("" + dice);
     });
 
     test("4d6+2 WEG Star Wars", function () {
-        var dice = lib.d6StarWarsDice(4, 2);
+        var dice = lib.weg.starWarsDice(4, 2);
         dice.roll();
         dice.total.should.be.above(6);
         dice.results.reduce(function (t, d) { return (t + d); }, 0).

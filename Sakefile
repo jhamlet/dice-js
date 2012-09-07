@@ -2,16 +2,28 @@
 
 var prereqs = new FileList("lib/*");
 
-CLEAN.include("dice-min.js");
+options.sync = true;
 
-file("dice-min.js", prereqs, function (t) {
-    sh("infuse lib/dice.js " + t.name + (t.exists ? " -F" : "") + " -E");
+require("sake/clean");
+
+CLEAN.include("dice-min.js", "dice-min.js.gz*");
+
+fileAsync("dice-min.js", prereqs, function (t) {
+    sh([
+        "infuse lib/dice.js ", t.name, (t.exists ? " -F" : ""), " -E"
+    ].join(" "), function () {
+        t.done();
+    });
 });
 
-task("default", ["dice-min.js"]);
+file("dice-min.js.gzip", ["dice-min.js"], function (t) {
+    sh(["gzip -c", t.prerequisites[0], ">", t.name].join(" "));
+});
+
+task("default", ["dice-min.js", "dice-min.js.gzip"]);
 
 task("test", ["dice-min.js"], function (t) {
-    sh("mocha test/test-min.js", function (results) {
+    sh("mocha test/test-min.js", function (err, results) {
         console.log(results);
     });
 });
