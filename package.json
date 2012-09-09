@@ -1,14 +1,14 @@
 {   
     "name": "dice-js",
     "description": "Roll some dice.",
-    "version": "0.2.0",
+    "version": "0.4.0",
     "keywords": [
         "dice",
         "die"
     ],
-    "main": "./lib/dice.js",
-    "directories": {
-        "lib": "lib"
+    "main": "./node_modules/dice-js/index.js",
+    "dependencies": {
+        "proteus":  ">=0.1.0"
     },
     "devDependencies": {
         "mocha":  ">=0.3.x",
@@ -16,6 +16,9 @@
         "infuse": "*",
         "sake":   ">=0.0.x"
     },
+    "bundledDependencies": [
+        "dice-js"
+    ],
     "scripts": {
         "test": "mocha"
     },
@@ -28,6 +31,9 @@
     "repository": {
         "type": "git",
         "url": "http://github.com/jhamlet/dice-js.git"
+    },
+    "bugs": {
+        "url": "http://github.com/jhamlet/dice-js/issues"
     },
     "preferGlobal": true
 }
