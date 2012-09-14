@@ -1,3 +1,4 @@
+/*globals suite, test, setup, teardown */
 
 var Dice    = require("dice-js/dice"),
     count   = 10,
