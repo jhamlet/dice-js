@@ -1,16 +1,16 @@
 /*globals suite, test, setup, teardown */
 
-var Dice    = require("dice-js/dice"),
-    DiceBehaviors = require("dice-js/behaviors"),
-    should  = require("should")
+var Dice        = require("dice-js"),
+    Behaviors   = Dice.Behaviors,
+    should      = require("should")
 ;
 
-suite("DiceBehaviors", function () {
+suite("Behaviors", function () {
     
     test("Basic Filter", function () {
         var simpleFilter, dice;
         
-        simpleFilter = DiceBehaviors.create("SimpleFilter", {
+        simpleFilter = Behaviors.create("SimpleFilter", {
             results: function (dice) {
                 return dice.results.map(function (result) {
                     return result > 3;
@@ -18,7 +18,7 @@ suite("DiceBehaviors", function () {
             }
         });
         
-        DiceBehaviors.get("SimpleFilter").should.equal(simpleFilter);
+        Behaviors.get("SimpleFilter").should.equal(simpleFilter);
         
         dice = new Dice(3, 6, ["SimpleFilter"]);
         should.exist(dice.__behaviorMgr__);
