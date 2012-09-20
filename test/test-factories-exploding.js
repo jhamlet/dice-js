@@ -1,6 +1,6 @@
 /*globals suite, test, setup, teardown */
 
-var Dice = require("dice-js/"),
+var Dice = require("dice-js"),
     tries = 5000,
     format = require("util").format,
     faces = [4, 6, 8, 10, 12, 20, 100]
