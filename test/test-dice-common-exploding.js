@@ -1,14 +1,11 @@
 /*globals suite, test, setup, teardown */
 
 var Dice = require("dice-js"),
+    repeat = require("./repeat"),
     tries = 5000,
     format = require("util").format,
     faces = [4, 6, 8, 10, 12, 20, 100]
 ;
-
-function repeat (fn, times) {
-    Array(times).join("-").split("-").forEach(fn);
-}
 
 suite("Exploding Dice", function () {
     
@@ -18,10 +15,10 @@ suite("Exploding Dice", function () {
         test(
             format("%s rolled %s times", fnName, tries),
             function () {
-                repeat(function () {
+                repeat(tries, function () {
                     var dice = new Dice[fnName](),
                         result = dice.result,
-                        count = 0;
+                        count = 0
                     ;
 
                     result.should.not.equal(faces);
@@ -32,7 +29,7 @@ suite("Exploding Dice", function () {
                         });
                         (dice.exploded.length).should.equal(count);
                     }
-                }, tries);
+                });
             }
         );
     });

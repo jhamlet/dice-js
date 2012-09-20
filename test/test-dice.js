@@ -1,6 +1,7 @@
 /*globals suite, test, setup, teardown */
 
 var Dice    = require("dice-js/dice"),
+    repeat  = require("./repeat"),
     count   = 20,
     tries   = 5000,
     dice    = [2, 4, 6, 8, 10, 12, 20, 100],
@@ -53,7 +54,7 @@ suite("Dice", function () {
             [dice].join().should.match(/^\[d\d+ \(\d+\) = \d+\]$/);
         });
         
-        Array(count).join("-").split("-").forEach(function (nil, idx) {
+        repeat(count, function (nil, idx) {
             var num = idx + 1,
                 min = num,
                 max = min * faces
@@ -62,7 +63,7 @@ suite("Dice", function () {
             test(
                 format("%sd%s rolled %s times all fall within %s and %s", num, faces, tries, min, max),
                 function () {
-                    Array(tries).join("-").split("-").forEach(function () {
+                    repeat(tries, function () {
                         var dice = new Dice(num, faces);
                         dice.roll().result.should.be.within(num, num * faces);
                     });
