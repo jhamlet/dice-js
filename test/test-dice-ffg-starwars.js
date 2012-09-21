@@ -115,7 +115,7 @@ function dieResultTest (type, faces) {
             result = dice.results[0];
         } while (result._ !== face);
 
-        test(type + " face " + face + " correct results", function () {
+        test(type + " die face " + face + " displays correct results", function () {
             Object.keys(expected).forEach(function (key) {
                 result.should.have.property(key, expected[key]);
             });
