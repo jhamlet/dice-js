@@ -100,7 +100,7 @@ RESULTS = {
 };
 
 function dieResultTest (type, faces) {
-    var dice = Dice["FfgStarWars" + type + "Dice"](1),
+    var dice = Dice["FfgStarWars" + type](1),
         expected,
         result
     ;
@@ -132,7 +132,7 @@ suite("FFG Star Wars Dice", function () {
     });
     
     // test("Pool", function () {
-    //     var dice = Dice.FfgStarWarsChallengeDice(3);
+    //     var dice = Dice.FfgStarWarsChallenge(3);
     //     
     //     // inspect(dice.result, true, 10);
     //     // inspect(dice.results, true, 10);

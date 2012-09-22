@@ -20,22 +20,22 @@ suite("Operator", function () {
         // console.log(op.valueOf());
         
         op = new Dice.Operator("+",
-            new Dice.FfgStarWarsForceDice(4),
-            new Dice.FfgStarWarsForceDice(1)
+            Dice.FfgStarWarsForce(4),
+            Dice.FfgStarWarsForce(1)
         );
         console.log(op.valueOf());
 
         op = new Dice.Operator("+",
-            new Dice.FfgStarWarsAbilityDice(2),
+            Dice.FfgStarWarsAbility(2),
             new Dice.Operator("+",
-                new Dice.FfgStarWarsProficiencyDice(1),
+                Dice.FfgStarWarsProficiency(1),
                 new Dice.Operator("+",
-                    new Dice.FfgStarWarsDifficultyDice(1),
+                    Dice.FfgStarWarsDifficulty(1),
                     new Dice.Operator("+",
-                        new Dice.FfgStarWarsChallengeDice(1),
+                        Dice.FfgStarWarsChallenge(1),
                         new Dice.Operator("+",
-                            new Dice.FfgStarWarsBoostDice(1),
-                            new Dice.FfgStarWarsSetbackDice(1)
+                            Dice.FfgStarWarsBoost(1),
+                            Dice.FfgStarWarsSetback(1)
                         )
                     )
                 )

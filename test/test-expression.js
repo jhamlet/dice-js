@@ -10,13 +10,13 @@ suite("Expression", function () {
     test("working", function () {
         var exp = new Expression();
         
-        exp.add(new Dice.FfgStarWarsAbilityDice(2));
-        exp.add(new Dice.FfgStarWarsProficiencyDice(2));
-        exp.add(new Dice.FfgStarWarsDifficultyDice(1));
-        exp.add(new Dice.FfgStarWarsChallengeDice(1));
-        exp.add(new Dice.FfgStarWarsBoostDice(1));
-        exp.add(new Dice.FfgStarWarsSetbackDice(1));
-        exp.add(new Dice.FfgStarWarsForceDice(4));
+        exp.add(new Dice.FfgStarWarsAbility(2));
+        exp.add(new Dice.FfgStarWarsProficiency(2));
+        exp.add(new Dice.FfgStarWarsDifficulty(1));
+        exp.add(new Dice.FfgStarWarsChallenge(1));
+        exp.add(new Dice.FfgStarWarsBoost(1));
+        exp.add(new Dice.FfgStarWarsSetback(1));
+        exp.add(new Dice.FfgStarWarsForce(4));
 
         // exp.add(new Dice(3, 6));
         // exp.add(new Dice(3, 6));
