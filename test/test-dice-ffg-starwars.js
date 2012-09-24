@@ -125,7 +125,7 @@ function dieResultTest (type, faces) {
     
 }
 
-suite("FFG Star Wars Dice", function () {
+suite("Dice - FFG - Star Wars", function () {
     
     Object.keys(FACES).forEach(function (key) {
         dieResultTest(key, FACES[key]);
