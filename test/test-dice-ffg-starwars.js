@@ -4,6 +4,7 @@ var Dice    = require("dice-js"),
     repeat  = require("./repeat"),
     inspect = require("./inspect"),
     should  = require("should"),
+    tries   = 5000,
     FACES,
     RESULTS
 ;
@@ -121,7 +122,7 @@ function dieResultTest (type, faces) {
             });
         });
         
-    })
+    });
     
 }
 
@@ -131,10 +132,62 @@ suite("Dice - FFG - Star Wars", function () {
         dieResultTest(key, FACES[key]);
     });
     
-    // test("Pool", function () {
-    //     var dice = Dice.FfgStarWarsChallenge(3);
-    //     
-    //     // inspect(dice.result, true, 10);
-    //     // inspect(dice.results, true, 10);
-    // });
+    test(
+        "Mixed pool (2dA + 1dP + 2dD + 1dC + 1dB + 1dS + 1dF) Addition x" + tries,
+        function () {
+            repeat(tries, function () {
+                var dice = [
+                        new Dice.FfgStarWarsAbility(2),
+                        new Dice.FfgStarWarsProficiency(1),
+                        new Dice.FfgStarWarsDifficulty(2),
+                        new Dice.FfgStarWarsChallenge(1),
+                        new Dice.FfgStarWarsBoost(1),
+                        new Dice.FfgStarWarsSetback(1),
+                        new Dice.FfgStarWarsForce(1)
+                    ],
+                    exp = new Dice.Expression(
+                        new Dice.Operator["+"](
+                            dice[0], new Dice.Operator("+",
+                                dice[1], new Dice.Operator("+",
+                                    dice[2], new Dice.Operator("+",
+                                        dice[3], new Dice.Operator("+",
+                                            dice[4], new Dice.Operator("+",
+                                                dice[5], dice[6]
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    expected,
+                    actual
+                ;
+                
+                expected = dice.reduce(function (acc, die) {
+                    var result = die.result;
+                    
+                    Object.keys(result).forEach(function (key) {
+                        acc[key] += result[key];
+                    });
+                    
+                    return acc;
+                }, {
+                    success: 0,
+                    advantage: 0,
+                    triumph: 0,
+                    failure: 0,
+                    threat: 0,
+                    despair: 0,
+                    lightside: 0,
+                    darkside: 0
+                });
+                
+                actual = exp.valueOf();
+                Object.keys(actual).forEach(function (key) {
+                    actual[key].should.equal(expected[key]);
+                });
+            });
+        }
+    );
 });
