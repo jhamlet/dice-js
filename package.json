@@ -8,13 +8,13 @@
     ],
     "main": "./node_modules/dice-js/index.js",
     "dependencies": {
-        "proteus":  ">=0.1.0"
+        "proteus":  ">=0.1.x"
     },
     "devDependencies": {
         "mocha":  ">=0.3.x",
         "should": ">=0.5.x",
         "infuse": "*",
-        "sake":   ">=0.0.x"
+        "sake":   ">=0.1.x"
     },
     "bundledDependencies": [
         "dice-js"
