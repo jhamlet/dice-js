@@ -1,29 +1,30 @@
 /*globals CLEAN, FileList, file, sh, task */
 
-var prereqs = new FileList("lib/*");
-
-options.sync = true;
-
-require("sake/clean");
-
-CLEAN.include("dice-min.js", "dice-min.js.gz*");
-
-fileAsync("dice-min.js", prereqs, function (t) {
-    sh([
-        "infuse lib/dice.js ", t.name, (t.exists ? " -F" : ""), " -E"
-    ].join(" "), function () {
-        t.done();
-    });
+var infuse = require("infuse");
+    
+taskSync("dice.js", ["node_modules/dice-js/index.js"], function (t) {
+    write(
+        t.name,
+        infuse(t.prerequisites[0], { nominify: true }),
+        "utf8"
+    );
+    log.info("Generated " + t.name);
 });
 
-file("dice-min.js.gzip", ["dice-min.js"], function (t) {
-    sh(["gzip -c", t.prerequisites[0], ">", t.name].join(" "));
+taskSync("dice-min.js", ["node_modules/dice-js/index.js"], function (t) {
+    write(
+        t.name,
+        infuse(t.prerequisites[0], { embed: true }),
+        "utf8"
+    );
+    log.info("Generated " + t.name);
 });
 
-task("default", ["dice-min.js", "dice-min.js.gzip"]);
+task("default", ["dice.js", "dice-min.js"]);
 
-task("test", ["dice-min.js"], function (t) {
-    sh("mocha test/test-min.js", function (err, results) {
+task("test", function (t) {
+    sh("mocha test/test-*", function (err, results) {
         console.log(results);
+        t.done();
     });
 });
