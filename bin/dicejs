@@ -6,11 +6,12 @@ var FS          = require("fs"),
     Dice        = require("dice-js"),
     pkgPath     = Path.join(__dirname, "..", "package.json"),
     pkgInfo     = JSON.parse(FS.readFileSync(pkgPath, "utf8")),
+    scriptName  = Path.basename(__filename),
     opts,
     expResult
 ;
 
-opts = nomnom.script("jdice").
+opts = nomnom.script(scriptName).
     options({
         expression: {
             string: "\"EXPRESSION\"",
