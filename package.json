@@ -8,7 +8,8 @@
     ],
     "main": "./node_modules/dice-js/index.js",
     "dependencies": {
-        "proteus":  ">=0.1.x"
+        "proteus":  ">=0.1.x",
+        "nomnom":   ">=1.5.x"
     },
     "devDependencies": {
         "mocha":  ">=0.3.x",
@@ -19,6 +20,9 @@
     "bundledDependencies": [
         "dice-js"
     ],
+    "bin": {
+        "jdice": "./bin/jdice"
+    },
     "scripts": {
         "test": "mocha"
     },

@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+
+var FS          = require("fs"),
+    Path        = require("path"),
+    nomnom      = require("nomnom"),
+    Dice        = require("dice-js"),
+    pkgPath     = Path.join(__dirname, "..", "package.json"),
+    pkgInfo     = JSON.parse(FS.readFileSync(pkgPath, "utf8")),
+    opts,
+    expResult
+;
+
+opts = nomnom.script("jdice").
+    options({
+        expression: {
+            string: "\"EXPRESSION\"",
+            position: 0,
+            help: "The dice expression to interpret. (NOTE: if using shell meta-characters (i.e: \"*\", or \"-\") the expression should be quoted.)"
+        },
+        defaultFaces: {
+            string: "-d, --default-faces",
+            help: "Set the default number of die faces. Defaults to 6.",
+            default: 6
+        },
+        verbose: {
+            string: "-v, --verbose",
+            flag: true,
+            help: "Display all dice results in output."
+        },
+        version: {
+            string: "-V, --version",
+            flag: true,
+            help: "Print the version information and exit.",
+            callback: function () {
+                return "version " + pkgInfo.version;
+            }
+        }
+    }).parse();
+
+// Fix expression to account for unquoted arguments
+opts.expression = opts._.join(" ");
+
+expResult = Dice.parse(opts.expression, {
+    defaultFaces: opts.defaultFaces
+});
+
+result = expResult.result;
+console.log(result);
+
+if (opts.verbose) {
+    expResult.dice.forEach(function (die) {
+        if (die.count > 1) {
+            die.results.forEach(function (result) {
+                console.log(result);
+            });
+        }
+        else {
+            console.log(die.result);
+        }
+    });
+}
