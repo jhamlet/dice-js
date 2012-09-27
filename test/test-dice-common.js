@@ -1,6 +1,7 @@
 /*globals suite, test, setup, teardown */
 
 var Dice = require("dice-js"),
+    Operator = Dice.Expression.Operator,
     repeat = require("./repeat"),
     tries = 5000,
     format = require("util").format,
@@ -44,7 +45,7 @@ suite("Dice - Common", function () {
             
             repeat(tries, function () {
                 var dice        = new Dice(5, faces),
-                    op          = new Dice.Operator("Low", dice, 3),
+                    op          = new Operator("Low", dice, 3),
                     results     = dice.results,
                     opResults   = op.valueOf(),
                     highest     = results.slice().sort(Dice.util.ascendingNumeric).slice(0, 3)
@@ -67,7 +68,7 @@ suite("Dice - Common", function () {
             
             repeat(tries, function () {
                 var dice        = new Dice(5, faces),
-                    op          = new Dice.Operator("High", dice, 3),
+                    op          = new Operator("High", dice, 3),
                     results     = dice.results,
                     opResults   = op.valueOf(),
                     highest     = results.slice().sort(Dice.util.descendingNumeric).slice(0, 3)
@@ -91,7 +92,7 @@ suite("Dice - Common", function () {
             
             repeat(tries, function () {
                 var dice        = new Dice(5, faces),
-                    op          = new Dice.Operator("Drop", dice, 2),
+                    op          = new Operator("Drop", dice, 2),
                     results     = dice.results,
                     opResults   = op.valueOf(),
                     highest     = results.slice().sort(Dice.util.descendingNumeric).slice(0, 3)
@@ -112,7 +113,7 @@ suite("Dice - Common", function () {
             
             repeat(tries, function () {
                 var dice        = new Dice(5, faces),
-                    op          = new Dice.Operator("Keep", dice, 3),
+                    op          = new Operator("Keep", dice, 3),
                     results     = dice.results,
                     opResults   = op.valueOf(),
                     highest     = results.slice().sort(Dice.util.descendingNumeric).slice(0, 3)

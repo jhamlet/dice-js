@@ -1,10 +1,12 @@
 /*globals suite, test, setup, teardown */
 
-var Dice    = require("dice-js"),
-    repeat  = require("./repeat"),
-    inspect = require("./inspect"),
-    should  = require("should"),
-    tries   = 5000,
+var Dice        = require("dice-js"),
+    Expression  = Dice.Expression,
+    Operator    = Expression.Operator,
+    repeat      = require("./repeat"),
+    inspect     = require("./inspect"),
+    should      = require("should"),
+    tries       = 5000,
     FACES,
     RESULTS
 ;
@@ -145,13 +147,13 @@ suite("Dice - FFG - Star Wars", function () {
                         new Dice.FfgStarWarsSetback(1),
                         new Dice.FfgStarWarsForce(1)
                     ],
-                    exp = new Dice.Expression(
-                        new Dice.Operator["+"](
-                            dice[0], new Dice.Operator("+",
-                                dice[1], new Dice.Operator("+",
-                                    dice[2], new Dice.Operator("+",
-                                        dice[3], new Dice.Operator("+",
-                                            dice[4], new Dice.Operator("+",
+                    exp = new Expression(
+                        new Expression.Operator["+"](
+                            dice[0], new Operator("+",
+                                dice[1], new Operator("+",
+                                    dice[2], new Operator("+",
+                                        dice[3], new Operator("+",
+                                            dice[4], new Operator("+",
                                                 dice[5], dice[6]
                                             )
                                         )
