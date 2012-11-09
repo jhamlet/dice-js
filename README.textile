@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/jhamlet/dice-js.png)](http://travis-ci.org/jhamlet/dice-js)
 h2. Work In Progress
 
 This is currently a **work in progress**. The notes below are mostly for myself, and are what I am aiming for the library to do.
